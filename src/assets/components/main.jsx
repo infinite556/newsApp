@@ -32,7 +32,16 @@ function Main({ initialCategory = "" }) {
           `/api/news?${params}`,
           { signal: controller.signal },
         );
-        const data = await response.json();
+        const responseText = await response.text();
+        let data;
+
+        try {
+          data = JSON.parse(responseText);
+        } catch {
+          throw new Error(
+            `News service returned an invalid response (HTTP ${response.status}).`,
+          );
+        }
 
         if (!response.ok || data.status !== "success") {
           throw new Error(data.message || "Unable to load news.");
