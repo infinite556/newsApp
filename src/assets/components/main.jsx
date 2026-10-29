@@ -19,10 +19,8 @@ function Main({ initialCategory = "" }) {
     const controller = new AbortController();
     const params = new URLSearchParams({
       q: category || "tesla",
-      from: "2026-09-29",
-      sortBy: "publishedAt",
-      pageSize: "20",
-      apiKey: "c4edb6a422684444bc33dc4377b3ad09",
+      language: "en",
+      size: "10",
     });
 
     async function getNews() {
@@ -31,21 +29,22 @@ function Main({ initialCategory = "" }) {
 
       try {
         const response = await fetch(
-          `https://newsapi.org/v2/everything?${params}`,
+          `/api/news?${params}`,
           { signal: controller.signal },
         );
         const data = await response.json();
 
-        if (!response.ok || data.status !== "ok") {
+        if (!response.ok || data.status !== "success") {
           throw new Error(data.message || "Unable to load news.");
         }
 
         setNewsList(
-          data.articles.map((article, index) => ({
+          (data.results || []).map((article, index) => ({
             ...article,
-            id: `${article.url}-${index}`,
-            image: article.urlToImage,
-            published: article.publishedAt,
+            id: `${article.link}-${index}`,
+            url: article.link,
+            image: article.image_url,
+            published: article.pubDate,
           })),
         );
       } catch (fetchError) {
