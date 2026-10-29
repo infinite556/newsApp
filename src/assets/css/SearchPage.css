@@ -1,0 +1,3 @@
+.search-main { min-height: calc(100vh - 190px); padding: 42px 24px 72px; background: var(--cream); }
+.search-main .news-list { max-width: 1180px; margin: 0 auto; }
+.search-main::before { content: 'Find your next story'; display: block; margin: 0 auto 20px; color: var(--navy); font-family: Zain, sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; text-align: center; }

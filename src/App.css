@@ -1,0 +1,19 @@
+:root {
+  --ink: #17212b;
+  --muted: #64707d;
+  --navy: #102a43;
+  --teal: #0f766e;
+  --cream: #f7f8f6;
+  --line: #e4e9e7;
+  --shadow: 0 16px 40px rgba(16, 42, 67, 0.09);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+button, a, input { font: inherit; }
+a { color: inherit; }
